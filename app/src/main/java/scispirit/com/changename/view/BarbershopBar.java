@@ -1,4 +1,4 @@
-package scispirit.com.changename.base.view;
+package scispirit.com.changename.view;
 
 import android.content.Context;
 import android.view.View;

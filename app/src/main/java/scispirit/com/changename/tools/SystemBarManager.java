@@ -1,4 +1,4 @@
-package scispirit.com.changename.base.tools;
+package scispirit.com.changename.tools;
 
 import android.app.Activity;
 import android.view.View;
