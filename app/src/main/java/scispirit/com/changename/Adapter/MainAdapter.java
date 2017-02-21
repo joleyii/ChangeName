@@ -12,16 +12,17 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import scispirit.com.changename.R;
+import scispirit.com.changename.bean.FileBean;
 
 /**
  * Created by yanjun on 2017/2/20.
  */
 
 public class MainAdapter extends RecyclerView.Adapter {
-    Context context;
-    ArrayList<Integer> arrayList = new ArrayList<>();
+    private Context context;
+    private ArrayList<FileBean> arrayList = new ArrayList<>();
 
-    public MainAdapter(Context context, ArrayList<Integer> arrayList) {
+    public MainAdapter(Context context, ArrayList<FileBean> arrayList) {
 
         this.context = context;
         this.arrayList = arrayList;
@@ -42,7 +43,7 @@ public class MainAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Log.d("ddddd", position + "");
-        ((MyViewHolder) holder).tvFilename.setText(arrayList.get(position) + "");
+        ((MyViewHolder) holder).tvFilename.setText(arrayList.get(position).getAddress());
 
     }
 
