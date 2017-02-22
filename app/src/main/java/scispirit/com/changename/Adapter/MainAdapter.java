@@ -47,7 +47,7 @@ public class MainAdapter extends RecyclerView.Adapter {
 
     }
 
-    private class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.title) TextView tvFilename;
 
         MyViewHolder(View view) {

@@ -12,21 +12,24 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tv_search"
         android:layout_width="300dp"
-        android:layout_height="10dp"
-        android:text="@string/main_search"
-        android:gravity="center" />
+        android:layout_height="100dp"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="@string/main_search" />
 
     <TextView
         android:id="@+id/tv_manual"
         android:layout_width="300dp"
-        android:layout_height="10dp"
-        android:text="@string/main_manual"
-        android:gravity="center" />
+        android:layout_height="100dp"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="@string/main_manual" />
 
 
 </LinearLayout>
