@@ -14,13 +14,11 @@ import java.io.File;
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import scispirit.com.changename.Adapter.MainAdapter;
 import scispirit.com.changename.AppBase.MyAppliction;
 import scispirit.com.changename.R;
 import scispirit.com.changename.bean.FileBean;
-import scispirit.com.changename.tools.FileTools;
 
 /**
  * 主界面，两个大的圆形按钮
@@ -44,7 +42,6 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
         RxPermissions rxPermissions = new RxPermissions(this);
         rxPermissions
                 .request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
