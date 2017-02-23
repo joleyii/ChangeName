@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
 import scispirit.com.changename.R;
 import scispirit.com.changename.bean.FileBean;
 
@@ -23,7 +22,6 @@ public class MainAdapter extends RecyclerView.Adapter {
     private ArrayList<FileBean> arrayList = new ArrayList<>();
 
     public MainAdapter(Context context, ArrayList<FileBean> arrayList) {
-
         this.context = context;
         this.arrayList = arrayList;
     }
@@ -48,7 +46,7 @@ public class MainAdapter extends RecyclerView.Adapter {
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.title) TextView tvFilename;
+        TextView tvFilename;
 
         MyViewHolder(View view) {
             super(view);
