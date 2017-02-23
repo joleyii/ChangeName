@@ -1,8 +1,9 @@
-package scispirit.com.changename.Activity;
+package scispirit.com.changename.activity;
 
 import android.Manifest;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -14,11 +15,13 @@ import java.io.File;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import scispirit.com.changename.Adapter.MainAdapter;
-import scispirit.com.changename.AppBase.MyAppliction;
 import scispirit.com.changename.R;
+import scispirit.com.changename.appBase.BaseActivity;
 import scispirit.com.changename.bean.FileBean;
+import scispirit.com.changename.view.BarbershopBar;
 
 /**
  * 主界面，两个大的圆形按钮
@@ -34,6 +37,11 @@ public class MainActivity extends BaseActivity {
 
     @BindView(R.id.tv_search)
     TextView tvSearch;
+    @BindView(R.id.tv_currentaddress)
+    TextView tvCurrentAddress;
+
+    @BindView(R.id.bbb_main)
+    BarbershopBar bbb;
 
     private MainAdapter mainAdapter;
     private ArrayList<FileBean> fileBeanArrayList = new ArrayList<>();
@@ -42,6 +50,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         RxPermissions rxPermissions = new RxPermissions(this);
         rxPermissions
                 .request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -52,14 +61,13 @@ public class MainActivity extends BaseActivity {
                         Log.d("dddd", "rrrrrrr");
                     }
                 });
-        ArrayList<FileBean> integers = new ArrayList<>();
-        mainAdapter = new MainAdapter(this, integers);
-
+        mainAdapter = new MainAdapter(this, fileBeanArrayList);
+        rvMain.setLayoutManager(new LinearLayoutManager(this));
+        rvMain.setAdapter(mainAdapter);
     }
 
     @OnClick(R.id.tv_search)
     public void searchClick() {
-        Log.d("dddd", "dddddd");
         rvMain.setVisibility(View.VISIBLE);
         tvSearch.setVisibility(View.GONE);
         tvManual.setVisibility(View.GONE);
@@ -68,12 +76,19 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    @OnClick(R.id.tv_manual)
+    public void manualClick() {
+
+    }
+
     public void getFile(File filepath) {
+
         //判断SD卡是否存在
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             File[] files = filepath.listFiles();
             if (files.length > 0) {
                 for (File file : files) {
+                    tvCurrentAddress.setText(file.getAbsolutePath());
                     if (file.isDirectory()) {
                         //如果目录可读就执行（一定要加，不然会挂掉）
                         if (file.canRead()) {
@@ -81,17 +96,12 @@ public class MainActivity extends BaseActivity {
                         }
                     } else {
                         //判断是文件，则进行文件名判断
-                        try {
-                            if (getSuffixName(file.getName()).equals(MyAppliction.appliction.getString(R.string.suffix)) ||
-                                    getSuffixName(file.getName()).equals(MyAppliction.appliction.getString(R.string.suffix).toLowerCase())) {
-                                FileBean fileBean = new FileBean();
-                                fileBean.setFile(file);
-                                fileBean.setAddress(file.getAbsolutePath());
-                                fileBeanArrayList.add(0, fileBean);
-                                mainAdapter.notifyItemInserted(0);
-                            }
-                        } catch (Exception e) {
-
+                        if (getSuffixName(file)) {
+                            FileBean fileBean = new FileBean();
+                            fileBean.setFile(file);
+                            fileBean.setAddress(file.getAbsolutePath());
+                            fileBeanArrayList.add(0, fileBean);
+                            mainAdapter.notifyItemInserted(0);
                         }
                     }
                 }
@@ -99,7 +109,21 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private String getSuffixName(String s) {
-        return s.substring(s.lastIndexOf(".") + 1);
+    private boolean getSuffixName(File file) {
+        String fileName = file.getAbsolutePath();
+        String suffix;
+        if (fileName.contains(".")) {
+            String middle[] = fileName.split("\\.");
+            if (middle.length > 1) {
+                suffix = middle[middle.length - 1];
+            } else {
+                suffix = "s";
+            }
+        } else {
+            suffix = "s";
+        }
+        return suffix.equals(getString(R.string.txt)) ||
+                suffix.equals(getString(R.string.txt).toLowerCase());
+
     }
 }

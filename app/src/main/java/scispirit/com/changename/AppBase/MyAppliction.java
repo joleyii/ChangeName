@@ -1,4 +1,4 @@
-package scispirit.com.changename.AppBase;
+package scispirit.com.changename.appBase;
 
 import android.app.Application;
 
@@ -12,6 +12,6 @@ public class MyAppliction extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        this.appliction = this;
+        appliction = this;
     }
 }

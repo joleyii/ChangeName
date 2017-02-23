@@ -1,15 +1,18 @@
-package scispirit.com.changename.Activity;
+package scispirit.com.changename.appBase;
 
 import android.app.Activity;
 import android.os.Bundle;
-
-import butterknife.ButterKnife;
 
 public class BaseActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }
