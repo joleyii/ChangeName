@@ -42,12 +42,14 @@ public class MainAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Log.d("ddddd", position + "");
         ((MyViewHolder) holder).tvFilename.setText(arrayList.get(position).getAddress());
+        ((MyViewHolder) holder).tvFilename.setOnClickListener(view -> {
+
+        });
 
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvFilename;
-
         MyViewHolder(View view) {
             super(view);
             tvFilename = (TextView) view.findViewById(R.id.tv_filename);

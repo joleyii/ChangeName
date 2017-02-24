@@ -3,4 +3,5 @@
     <string name="main_search">点击获得搜索手机中的文本文件</string>
     <string name="main_manual">手动选择文本文件</string>
     <string name="txt">txt</string>
+    <string name="changname">点击更换小说中的文字</string>
 </resources>

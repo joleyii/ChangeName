@@ -19,7 +19,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import scispirit.com.changename.Adapter.MainAdapter;
 import scispirit.com.changename.R;
-import scispirit.com.changename.appBase.BaseActivity;
 import scispirit.com.changename.bean.FileBean;
 import scispirit.com.changename.view.BarbershopBar;
 
