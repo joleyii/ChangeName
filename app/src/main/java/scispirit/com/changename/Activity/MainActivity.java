@@ -89,9 +89,8 @@ public class MainActivity extends BaseActivity {
                 for (File file : files) {
                     tvCurrentAddress.setText(file.getAbsolutePath());
                     if (file.isDirectory()) {
-                        //如果目录可读就执行（一定要加，不然会挂掉）
                         if (file.canRead()) {
-                            getFile(file);  //如果是目录，递归查找
+                            getFile(file);
                         }
                     } else {
                         //判断是文件，则进行文件名判断
