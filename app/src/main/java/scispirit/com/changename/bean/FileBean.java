@@ -1,12 +1,13 @@
 package scispirit.com.changename.bean;
 
 import java.io.File;
+import java.io.Serializable;
 
 /**
  * Created by yanjun on 2017/2/21.
  */
 
-public class FileBean {
+public class FileBean implements Serializable{
     private String address;
     private File file;
 

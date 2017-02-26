@@ -1,6 +1,7 @@
 package scispirit.com.changename.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import scispirit.com.changename.R;
+import scispirit.com.changename.activity.ChangeNameActivity;
 import scispirit.com.changename.bean.FileBean;
 
 /**
@@ -43,7 +45,9 @@ public class MainAdapter extends RecyclerView.Adapter {
         Log.d("ddddd", position + "");
         ((MyViewHolder) holder).tvFilename.setText(arrayList.get(position).getAddress());
         ((MyViewHolder) holder).tvFilename.setOnClickListener(view -> {
-
+            Intent intent = new Intent(context, ChangeNameActivity.class);
+            intent.putExtra("file", arrayList.get(position));
+            context.startActivity(intent);
         });
 
     }
