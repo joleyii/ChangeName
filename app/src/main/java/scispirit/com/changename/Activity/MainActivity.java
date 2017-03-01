@@ -81,7 +81,6 @@ public class MainActivity extends BaseActivity {
     }
 
     public void getFile(File filepath) {
-
         //判断SD卡是否存在
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             File[] files = filepath.listFiles();
