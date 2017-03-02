@@ -17,15 +17,20 @@
         android:layout_weight="1">
 
         <LinearLayout
-            android:id="@+id/ll_change"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:id="@+id/ll_change"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" />
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
         </LinearLayout>
-
-
     </ScrollView>
 
 </LinearLayout>

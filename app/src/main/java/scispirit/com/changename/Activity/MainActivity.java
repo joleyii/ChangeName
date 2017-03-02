@@ -11,12 +11,16 @@ import android.widget.TextView;
 
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import org.reactivestreams.Subscriber;
+
 import java.io.File;
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.Flowable;
+import io.reactivex.functions.Predicate;
 import scispirit.com.changename.Adapter.MainAdapter;
 import scispirit.com.changename.R;
 import scispirit.com.changename.bean.FileBean;
@@ -85,6 +89,12 @@ public class MainActivity extends BaseActivity {
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             File[] files = filepath.listFiles();
             if (files.length > 0) {
+                Flowable.fromArray(files).filter(new Predicate<File>() {
+                    @Override
+                    public boolean test(File file) throws Exception {
+                        return false;
+                    }
+                })
                 for (File file : files) {
                     tvCurrentAddress.setText(file.getAbsolutePath());
                     if (file.isDirectory()) {
