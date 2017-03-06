@@ -19,7 +19,11 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
+import io.reactivex.FlowableEmitter;
+import io.reactivex.FlowableOnSubscribe;
+import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Predicate;
 import scispirit.com.changename.Adapter.MainAdapter;
 import scispirit.com.changename.R;
@@ -64,6 +68,18 @@ public class MainActivity extends BaseActivity {
                         Log.d("dddd", "rrrrrrr");
                     }
                 });
+
+        Flowable<String> flowable = Flowable.create((FlowableEmitter<String> emitter) -> {
+            emitter.onNext("1");
+            emitter.onNext("2");
+            emitter.onComplete();
+        }, BackpressureStrategy.BUFFER);
+        Consumer consumer2 = o -> Log.d(";;;consumer0", "0");
+        flowable.subscribe(consumer2);
+        Consumer consumer1 = o -> Log.d(";;;consumerr1", "1");
+        flowable.subscribe(consumer1);
+
+
         mainAdapter = new MainAdapter(this, fileBeanArrayList);
         rvMain.setLayoutManager(new LinearLayoutManager(this));
         rvMain.setAdapter(mainAdapter);
@@ -89,27 +105,23 @@ public class MainActivity extends BaseActivity {
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             File[] files = filepath.listFiles();
             if (files.length > 0) {
-                Flowable.fromArray(files).filter(new Predicate<File>() {
-                    @Override
-                    public boolean test(File file) throws Exception {
-                        return false;
-                    }
-                })
                 for (File file : files) {
                     tvCurrentAddress.setText(file.getAbsolutePath());
                     if (file.isDirectory()) {
-                        if (file.canRead()) {
-                            getFile(file);
-                        }
+                        Flowable.fromArray(files)
+                                .filter(File::canRead)
+                                .subscribe(this::getFile);
                     } else {
                         //判断是文件，则进行文件名判断
-                        if (getSuffixName(file)) {
-                            FileBean fileBean = new FileBean();
-                            fileBean.setFile(file);
-                            fileBean.setAddress(file.getAbsolutePath());
-                            fileBeanArrayList.add(0, fileBean);
-                            mainAdapter.notifyItemInserted(0);
-                        }
+                        Flowable.fromArray(files)
+                                .filter(this::getSuffixName)
+                                .subscribe(file1 -> {
+                                    FileBean fileBean = new FileBean();
+                                    fileBean.setFile(file);
+                                    fileBean.setAddress(file.getAbsolutePath());
+                                    fileBeanArrayList.add(0, fileBean);
+                                    mainAdapter.notifyItemInserted(0);
+                                });
                     }
                 }
             }
