@@ -19,7 +19,6 @@ import scispirit.com.changename.R;
  * 只要edittext放生变化就 增加item数量
  */
 
-
 public class ChangeNameActivity extends BaseActivity {
     static final int FIRST_ADD_VIEW_NUMBER = 5;
     SparseArray<String> changedNames = new SparseArray<>();
