@@ -9,8 +9,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.HashMap;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -27,7 +25,6 @@ public class ChangeNameActivity extends BaseActivity {
     SparseArray<String> changedNames = new SparseArray<>();
     SparseArray<String> changeToNames = new SparseArray<>();
 
-
     @BindView(R.id.tv_change)
     TextView tvChange;
 
@@ -36,7 +33,6 @@ public class ChangeNameActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_changename);
         ButterKnife.bind(this);
@@ -45,11 +41,7 @@ public class ChangeNameActivity extends BaseActivity {
 
     private void setView() {//添加置换列表
         for (int i = 1; i < FIRST_ADD_VIEW_NUMBER; i++) {
-
-
         }
-
-
     }
 
     private void addItem(int position) {
@@ -59,12 +51,10 @@ public class ChangeNameActivity extends BaseActivity {
         editTextLeft.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
@@ -75,12 +65,10 @@ public class ChangeNameActivity extends BaseActivity {
         editTextRight.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
